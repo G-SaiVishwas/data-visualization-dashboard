@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bank Customer Retention Analysis Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .metrics {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+      }
+      .metric-card {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+        width: 22%;
+        text-align: center;
+      }
+      .visualization {
+        margin-bottom: 30px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+      }
+      .col-6 {
+        width: 48%;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+      .recommendations {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🏦 Bank Customer Retention Analysis Dashboard</h1>
+      </div>
+
+      <div class="metrics">
+        <div class="metric-card">
+          <h3>Churn Rate</h3>
+          <h2>20.4%</h2>
+        </div>
+        <div class="metric-card">
+          <h3>Active Members</h3>
+          <h2>51.5%</h2>
+        </div>
+        <div class="metric-card">
+          <h3>Avg Satisfaction</h3>
+          <h2>3.0/5</h2>
+        </div>
+        <div class="metric-card">
+          <h3>Complaint Rate</h3>
+          <h2>20.4%</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="visualization">
+            <h3>Geographic Distribution of Churn</h3>
+            <img
+              src="visualizations/churn_by_geography.png"
+              alt="Churn by Geography"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="visualization">
+            <h3>Age Distribution Analysis</h3>
+            <img
+              src="visualizations/age_distribution.png"
+              alt="Age Distribution"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="visualization">
+            <h3>Balance Distribution</h3>
+            <img
+              src="visualizations/balance_distribution.png"
+              alt="Balance Distribution"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="visualization">
+            <h3>Product Usage Analysis</h3>
+            <img
+              src="visualizations/product_analysis.png"
+              alt="Product Analysis"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <div class="visualization">
+            <h3>Satisfaction Analysis</h3>
+            <img
+              src="visualizations/satisfaction_analysis.png"
+              alt="Satisfaction Analysis"
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="visualization">
+            <h3>Correlation Analysis</h3>
+            <img
+              src="visualizations/correlation_matrix.png"
+              alt="Correlation Matrix"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="recommendations">
+        <h2>Key Recommendations</h2>
+        <h3>1. Targeted Retention Program for German Market</h3>
+        <ul>
+          <li>
+            Investigate specific issues in the German market (32.4% churn rate)
+          </li>
+          <li>Develop country-specific retention strategies</li>
+        </ul>
+
+        <h3>2. Age-Specific Customer Engagement</h3>
+        <ul>
+          <li>
+            Create specialized products for older customers (avg. age of
+            churned: 44.8 years)
+          </li>
+          <li>Enhance digital banking support for senior customers</li>
+        </ul>
+
+        <h3>3. High-Value Customer Program</h3>
+        <ul>
+          <li>Implement VIP service for high-balance accounts</li>
+          <li>Develop personalized relationship management</li>
+        </ul>
+
+        <h3>4. Product Diversification</h3>
+        <ul>
+          <li>Encourage multi-product relationships</li>
+          <li>Create bundled offerings with better benefits</li>
+        </ul>
+
+        <h3>5. Proactive Complaint Resolution</h3>
+        <ul>
+          <li>Implement early warning system for customer dissatisfaction</li>
+          <li>Enhance complaint resolution processes</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
