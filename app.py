@@ -16,7 +16,7 @@ COLORS = {
     'text': '#2c3e50',
     'light': '#ecf0f1'
 }
-
+#Sample comment to check the git changes
 # Load and prepare data
 df = pd.read_csv('Customer-Churn-Records.csv')
 
