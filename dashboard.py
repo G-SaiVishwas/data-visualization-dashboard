@@ -25,29 +25,33 @@ def create_figure_layout(title, height=None):
     layout = dict(
         title=dict(
             text=title,
-            y=0.95,  # Move title up
+            y=0.95,
             x=0.5,
             xanchor='center',
             yanchor='top',
             font=dict(
-                color='#1E1E1E',
+                color='#000000',
                 size=20
             )
         ),
         paper_bgcolor='white',
         plot_bgcolor='white',
         font=dict(
-            color='#1E1E1E',
+            color='#000000',
             size=14
         ),
-        margin=dict(t=80, l=50, r=50, b=50),  # Increased top margin
+        margin=dict(t=80, l=50, r=50, b=50),
         xaxis=dict(
-            title_font=dict(color='#1E1E1E', size=16),
-            tickfont=dict(color='#1E1E1E', size=12)
+            title_font=dict(color='#000000', size=16),
+            tickfont=dict(color='#000000', size=12),
+            gridcolor='rgba(128, 128, 128, 0.2)',
+            linecolor='rgba(0, 0, 0, 0.3)'
         ),
         yaxis=dict(
-            title_font=dict(color='#1E1E1E', size=16),
-            tickfont=dict(color='#1E1E1E', size=12)
+            title_font=dict(color='#000000', size=16),
+            tickfont=dict(color='#000000', size=12),
+            gridcolor='rgba(128, 128, 128, 0.2)',
+            linecolor='rgba(0, 0, 0, 0.3)'
         )
     )
     if height:
@@ -82,7 +86,7 @@ def update_plotly_layout(fig):
         paper_bgcolor='white',
         plot_bgcolor='white',
         font=dict(
-            color='#1E1E1E',
+            color='#000000',
             size=14
         ),
         xaxis=dict(
@@ -92,8 +96,8 @@ def update_plotly_layout(fig):
             showline=True,
             linewidth=1,
             linecolor='rgba(0, 0, 0, 0.3)',
-            title_font=dict(color='#1E1E1E', size=16),
-            tickfont=dict(color='#1E1E1E', size=12)
+            title_font=dict(color='#000000', size=16),
+            tickfont=dict(color='#000000', size=12)
         ),
         yaxis=dict(
             showgrid=True,
@@ -102,28 +106,15 @@ def update_plotly_layout(fig):
             showline=True,
             linewidth=1,
             linecolor='rgba(0, 0, 0, 0.3)',
-            title_font=dict(color='#1E1E1E', size=16),
-            tickfont=dict(color='#1E1E1E', size=12)
+            title_font=dict(color='#000000', size=16),
+            tickfont=dict(color='#000000', size=12)
         ),
         margin=dict(t=80, l=50, r=50, b=50),
         modebar=dict(
             bgcolor='rgba(255, 255, 255, 0.9)',
-            color='#1E1E1E',
+            color='#000000',
             activecolor='#4CAF50'
-        ),
-        shapes=[dict(
-            type='rect',
-            xref='paper',
-            yref='paper',
-            x0=0,
-            y0=0,
-            x1=1,
-            y1=1,
-            line=dict(
-                color='#E0E0E0',
-                width=1
-            )
-        )]
+        )
     )
     return fig
 
@@ -167,10 +158,10 @@ st.markdown("""
     .stPlotlyChart {
         background-color: white !important;
         padding: 1rem;
-        border-radius: 10px !important;
+        border-radius: 8px !important;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
         margin: 1rem 0 !important;
-        border: 1px solid #E0E0E0 !important;
+        overflow: hidden !important;
     }
     .css-1d391kg {
         padding-top: 1rem;
@@ -204,9 +195,10 @@ st.markdown("""
     }
     .modebar {
         background-color: rgba(255, 255, 255, 0.9) !important;
-        border-radius: 8px !important;
+        border-radius: 4px !important;
         margin-top: 10px !important;
         border: 1px solid #E0E0E0 !important;
+        right: 10px !important;
     }
     .modebar-btn {
         color: #1E1E1E !important;
@@ -223,15 +215,23 @@ st.markdown("""
     .js-plotly-plot .plotly .modebar {
         top: 10px !important;
     }
-    /* Graph title and label styles */
     .gtitle, .xtitle, .ytitle {
-        fill: #1E1E1E !important;
+        fill: #000000 !important;
         font-size: 16px !important;
         font-weight: 500 !important;
     }
     .xtick text, .ytick text {
-        fill: #1E1E1E !important;
+        fill: #000000 !important;
         font-size: 12px !important;
+    }
+    .js-plotly-plot .plotly .main-svg {
+        border-radius: 8px !important;
+    }
+    .js-plotly-plot {
+        border-radius: 8px !important;
+    }
+    .plot-container {
+        border-radius: 8px !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -252,7 +252,8 @@ page = st.sidebar.radio("Select Page", [
     "💰 Financial Analysis",
     "⭐ Satisfaction Analysis",
     "🔮 Churn Prediction",
-    "📈 Interactive Analysis"
+    "📈 Interactive Analysis",
+    "❓ Help & Guide"
 ])
 
 # Overview Page
@@ -320,7 +321,7 @@ if page == "📊 Overview":
             x=0.5,
             xanchor='center',
             yanchor='top',
-            font=dict(color='#1E1E1E', size=20)
+            font=dict(color='#000000', size=20)
         ),
         geo=dict(
             scope='europe',
@@ -336,7 +337,7 @@ if page == "📊 Overview":
         ),
         paper_bgcolor='white',
         plot_bgcolor='white',
-        font=dict(color='#1E1E1E', size=14),
+        font=dict(color='#000000', size=14),
         height=500,
         margin=dict(t=80, l=50, r=50, b=50)
     )
@@ -369,10 +370,10 @@ if page == "📊 Overview":
         fig_age.update_traces(
             box=dict(
                 fillcolor='white',
-                line=dict(color='#1E1E1E', width=1)
+                line=dict(color='#000000', width=1)
             ),
-            meanline=dict(color='#1E1E1E', width=1),
-            line=dict(color='#1E1E1E', width=1)
+            meanline=dict(color='#000000', width=1),
+            line=dict(color='#000000', width=1)
         )
         
         fig_age = update_plotly_layout(fig_age)
@@ -397,9 +398,9 @@ if page == "📊 Overview":
                 x=0.5,
                 xanchor='center',
                 yanchor='top',
-                font=dict(color='#1E1E1E', size=20)
+                font=dict(color='#000000', size=20)
             ),
-            font=dict(color='#1E1E1E', size=14)
+            font=dict(color='#000000', size=14)
         )
         
         fig_products = update_plotly_layout(fig_products)
@@ -805,7 +806,7 @@ elif page == "🔮 Churn Prediction":
         except Exception as e:
             st.error(f"Error making prediction: {str(e)}")
 
-else:  # Interactive Analysis
+elif page == "📈 Interactive Analysis":
     st.title("Interactive Analysis")
     
     # Feature Selection
@@ -907,18 +908,114 @@ else:  # Interactive Analysis
             x=0.5,
             xanchor='center',
             yanchor='top',
-            font=dict(color='#1E1E1E', size=20)
+            font=dict(color='#000000', size=20)
         ),
-        font=dict(color='#1E1E1E', size=14),
+        font=dict(color='#000000', size=14),
         coloraxis_colorbar=dict(
             title="Correlation",
-            titlefont=dict(color='#1E1E1E', size=14),
-            tickfont=dict(color='#1E1E1E', size=12)
+            titlefont=dict(color='#000000', size=14),
+            tickfont=dict(color='#000000', size=12)
         )
     )
     
     fig_corr = update_plotly_layout(fig_corr)
     st.plotly_chart(fig_corr, use_container_width=True, config=get_plot_config())
+
+elif page == "❓ Help & Guide":
+    st.title("How to Use This Dashboard")
+    
+    st.markdown("""
+    ## Welcome to the Bank Customer Retention Analysis Dashboard! 👋
+    
+    This guide will help you navigate and make the most of our interactive dashboard.
+    
+    ### 📍 Navigation
+    - Use the sidebar menu (🎯) to switch between different sections
+    - Each section provides unique insights and analysis capabilities
+    
+    ### 🔍 Key Features by Section
+    
+    #### 1. Overview Dashboard (📊)
+    - View key performance metrics at a glance
+    - Explore geographic distribution of churn on an interactive map
+    - Analyze age distribution and product usage patterns
+    - **Tip**: Hover over charts for detailed information
+    
+    #### 2. Customer Demographics (👥)
+    - Use sliders to filter age ranges
+    - Compare gender distribution between churned and retained customers
+    - **Tip**: Click on legend items to show/hide specific categories
+    
+    #### 3. Financial Analysis (💰)
+    - Adjust balance range using the slider
+    - View credit score distribution
+    - Analyze relationships between financial metrics
+    - **Tip**: Use the zoom tools to focus on specific areas
+    
+    #### 4. Satisfaction Analysis (⭐)
+    - Select specific satisfaction scores to analyze
+    - View complaint rates by geography
+    - Track satisfaction trends
+    - **Tip**: Click through the sunburst chart layers for detailed views
+    
+    #### 5. Churn Prediction (🔮)
+    - Input customer details using sliders and dropdowns
+    - Get real-time churn probability predictions
+    - View feature importance analysis
+    - **Tip**: Try different combinations to understand risk factors
+    
+    #### 6. Interactive Analysis (📈)
+    - Choose different features for X and Y axes
+    - Select from multiple plot types
+    - Explore correlation between variables
+    - **Tip**: Use the drawing tools to annotate interesting patterns
+    
+    ### 🛠️ Interactive Features
+    
+    #### Drawing Tools
+    1. Click the pencil icon in the chart toolbar
+    2. Choose from lines, shapes, or text annotations
+    3. Draw or write on the charts
+    4. Use the eraser tool to remove annotations
+    
+    #### Chart Controls
+    - 📱 Pan: Click and drag
+    - 🔍 Zoom: Use the zoom buttons or scroll wheel
+    - 📸 Download: Click the camera icon
+    - ↩️ Reset: Double click or use the home button
+    
+    #### Filtering Data
+    - Use sliders to adjust ranges
+    - Click on legend items to filter categories
+    - Select multiple items in dropdowns
+    
+    ### 💡 Pro Tips
+    1. **Hover** over any chart element for detailed information
+    2. **Double-click** charts to reset the view
+    3. Use the **drawing tools** to highlight important findings
+    4. **Export** charts using the camera icon
+    5. **Combine filters** for deeper analysis
+    
+    ### 🎨 Customization
+    - Charts are interactive and can be:
+        - Zoomed
+        - Panned
+        - Downloaded
+        - Annotated
+        - Reset
+    
+    ### 🤔 Need Help?
+    - Look for tooltips and hover information
+    - Check the documentation in our repository
+    - Open an issue for support
+    
+    ### 🔄 Regular Updates
+    We continuously improve the dashboard with:
+    - New features
+    - Enhanced visualizations
+    - Performance optimizations
+    - User experience improvements
+    """)
 
 # Footer
 st.markdown("---")
