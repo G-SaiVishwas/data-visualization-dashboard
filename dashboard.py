@@ -14,7 +14,9 @@ if not os.path.exists('models'):
     os.makedirs('models')
     from model import train_model
     train_model()
-elif not os.path.exists('models/churn_model.joblib'):
+elif not os.path.exists('models/churn_model.joblib') or \
+     not os.path.exists('models/le_geography.joblib') or \
+     not os.path.exists('models/le_gender.joblib'):
     from model import train_model
     train_model()
 
@@ -26,12 +28,27 @@ def create_figure_layout(title, height=None):
             y=0.95,  # Move title up
             x=0.5,
             xanchor='center',
-            yanchor='top'
+            yanchor='top',
+            font=dict(
+                color='#1E1E1E',
+                size=20
+            )
         ),
         paper_bgcolor='white',
         plot_bgcolor='white',
-        font=dict(color='#1E1E1E'),
-        margin=dict(t=80, l=50, r=50, b=50)  # Increased top margin
+        font=dict(
+            color='#1E1E1E',
+            size=14
+        ),
+        margin=dict(t=80, l=50, r=50, b=50),  # Increased top margin
+        xaxis=dict(
+            title_font=dict(color='#1E1E1E', size=16),
+            tickfont=dict(color='#1E1E1E', size=12)
+        ),
+        yaxis=dict(
+            title_font=dict(color='#1E1E1E', size=16),
+            tickfont=dict(color='#1E1E1E', size=12)
+        )
     )
     if height:
         layout['height'] = height
@@ -64,14 +81,19 @@ def update_plotly_layout(fig):
     fig.update_layout(
         paper_bgcolor='white',
         plot_bgcolor='white',
-        font=dict(color='#1E1E1E'),
+        font=dict(
+            color='#1E1E1E',
+            size=14
+        ),
         xaxis=dict(
             showgrid=True,
             gridwidth=1,
             gridcolor='rgba(128, 128, 128, 0.2)',
             showline=True,
             linewidth=1,
-            linecolor='rgba(0, 0, 0, 0.3)'
+            linecolor='rgba(0, 0, 0, 0.3)',
+            title_font=dict(color='#1E1E1E', size=16),
+            tickfont=dict(color='#1E1E1E', size=12)
         ),
         yaxis=dict(
             showgrid=True,
@@ -79,14 +101,29 @@ def update_plotly_layout(fig):
             gridcolor='rgba(128, 128, 128, 0.2)',
             showline=True,
             linewidth=1,
-            linecolor='rgba(0, 0, 0, 0.3)'
+            linecolor='rgba(0, 0, 0, 0.3)',
+            title_font=dict(color='#1E1E1E', size=16),
+            tickfont=dict(color='#1E1E1E', size=12)
         ),
-        margin=dict(t=80, l=50, r=50, b=50),  # Increased top margin for menu
+        margin=dict(t=80, l=50, r=50, b=50),
         modebar=dict(
             bgcolor='rgba(255, 255, 255, 0.9)',
             color='#1E1E1E',
             activecolor='#4CAF50'
-        )
+        ),
+        shapes=[dict(
+            type='rect',
+            xref='paper',
+            yref='paper',
+            x0=0,
+            y0=0,
+            x1=1,
+            y1=1,
+            line=dict(
+                color='#E0E0E0',
+                width=1
+            )
+        )]
     )
     return fig
 
@@ -130,8 +167,10 @@ st.markdown("""
     .stPlotlyChart {
         background-color: white !important;
         padding: 1rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border-radius: 10px !important;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+        margin: 1rem 0 !important;
+        border: 1px solid #E0E0E0 !important;
     }
     .css-1d391kg {
         padding-top: 1rem;
@@ -167,6 +206,7 @@ st.markdown("""
         background-color: rgba(255, 255, 255, 0.9) !important;
         border-radius: 8px !important;
         margin-top: 10px !important;
+        border: 1px solid #E0E0E0 !important;
     }
     .modebar-btn {
         color: #1E1E1E !important;
@@ -182,6 +222,16 @@ st.markdown("""
     }
     .js-plotly-plot .plotly .modebar {
         top: 10px !important;
+    }
+    /* Graph title and label styles */
+    .gtitle, .xtitle, .ytitle {
+        fill: #1E1E1E !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+    }
+    .xtick text, .ytick text {
+        fill: #1E1E1E !important;
+        font-size: 12px !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -266,7 +316,11 @@ if page == "📊 Overview":
     fig.update_layout(
         title=dict(
             text="Customer Distribution and Churn Rate by Country",
-            y=0.95  # Move title up to avoid overlap
+            y=0.95,
+            x=0.5,
+            xanchor='center',
+            yanchor='top',
+            font=dict(color='#1E1E1E', size=20)
         ),
         geo=dict(
             scope='europe',
@@ -274,12 +328,17 @@ if page == "📊 Overview":
             showcountries=True,
             countrycolor='rgb(200, 200, 200)',
             projection_type='mercator',
-            bgcolor='white'  # White background for map
+            bgcolor='white',
+            showcoastlines=True,
+            coastlinecolor='rgb(150, 150, 150)',
+            showframe=True,
+            framecolor='rgb(150, 150, 150)'
         ),
         paper_bgcolor='white',
         plot_bgcolor='white',
-        font=dict(color='#1E1E1E'),
-        height=500
+        font=dict(color='#1E1E1E', size=14),
+        height=500,
+        margin=dict(t=80, l=50, r=50, b=50)
     )
     
     fig = update_plotly_layout(fig)
@@ -307,6 +366,15 @@ if page == "📊 Overview":
         
         fig_age.update_layout(**create_figure_layout("Age Distribution by Churn Status"))
         
+        fig_age.update_traces(
+            box=dict(
+                fillcolor='white',
+                line=dict(color='#1E1E1E', width=1)
+            ),
+            meanline=dict(color='#1E1E1E', width=1),
+            line=dict(color='#1E1E1E', width=1)
+        )
+        
         fig_age = update_plotly_layout(fig_age)
         st.plotly_chart(fig_age, use_container_width=True, config=get_plot_config())
     
@@ -322,7 +390,17 @@ if page == "📊 Overview":
             color_discrete_map={0: colors['primary'], 1: colors['danger']}
         )
         
-        fig_products.update_layout(**create_figure_layout("Product Usage and Churn Distribution"))
+        fig_products.update_layout(
+            title=dict(
+                text="Product Usage and Churn Distribution",
+                y=0.95,
+                x=0.5,
+                xanchor='center',
+                yanchor='top',
+                font=dict(color='#1E1E1E', size=20)
+            ),
+            font=dict(color='#1E1E1E', size=14)
+        )
         
         fig_products = update_plotly_layout(fig_products)
         st.plotly_chart(fig_products, use_container_width=True, config=get_plot_config())
@@ -468,6 +546,11 @@ elif page == "💰 Financial Analysis":
             font=dict(color=colors['text'])
         )
         
+        fig_credit.update_traces(
+            opacity=0.75,
+            marker=dict(line=dict(color='white', width=1))
+        )
+        
         fig_credit = update_plotly_layout(fig_credit)
         st.plotly_chart(fig_credit, use_container_width=True, config=get_plot_config())
     
@@ -488,6 +571,13 @@ elif page == "💰 Financial Analysis":
             paper_bgcolor=colors['background'],
             plot_bgcolor=colors['background'],
             font=dict(color=colors['text'])
+        )
+        
+        fig_scatter.update_traces(
+            marker=dict(
+                line=dict(color='white', width=1),
+                opacity=0.7
+            )
         )
         
         fig_scatter = update_plotly_layout(fig_scatter)
@@ -811,9 +901,20 @@ else:  # Interactive Analysis
     )
     
     fig_corr.update_layout(
-        paper_bgcolor=colors['background'],
-        plot_bgcolor=colors['background'],
-        font=dict(color=colors['text'])
+        title=dict(
+            text="Feature Correlation Matrix",
+            y=0.95,
+            x=0.5,
+            xanchor='center',
+            yanchor='top',
+            font=dict(color='#1E1E1E', size=20)
+        ),
+        font=dict(color='#1E1E1E', size=14),
+        coloraxis_colorbar=dict(
+            title="Correlation",
+            titlefont=dict(color='#1E1E1E', size=14),
+            tickfont=dict(color='#1E1E1E', size=12)
+        )
     )
     
     fig_corr = update_plotly_layout(fig_corr)
