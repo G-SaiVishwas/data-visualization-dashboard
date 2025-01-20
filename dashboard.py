@@ -30,28 +30,28 @@ def create_figure_layout(title, height=None):
             xanchor='center',
             yanchor='top',
             font=dict(
-                color='#000000',
+                color='#FFFFFF',
                 size=20
             )
         ),
-        paper_bgcolor='white',
-        plot_bgcolor='white',
+        paper_bgcolor='#2D2D2D',
+        plot_bgcolor='#2D2D2D',
         font=dict(
-            color='#000000',
+            color='#FFFFFF',
             size=14
         ),
         margin=dict(t=80, l=50, r=50, b=50),
         xaxis=dict(
-            title_font=dict(color='#000000', size=16),
-            tickfont=dict(color='#000000', size=12),
-            gridcolor='rgba(128, 128, 128, 0.2)',
-            linecolor='rgba(0, 0, 0, 0.3)'
+            title_font=dict(color='#FFFFFF', size=16),
+            tickfont=dict(color='#FFFFFF', size=12),
+            gridcolor='rgba(255, 255, 255, 0.1)',
+            linecolor='rgba(255, 255, 255, 0.2)'
         ),
         yaxis=dict(
-            title_font=dict(color='#000000', size=16),
-            tickfont=dict(color='#000000', size=12),
-            gridcolor='rgba(128, 128, 128, 0.2)',
-            linecolor='rgba(0, 0, 0, 0.3)'
+            title_font=dict(color='#FFFFFF', size=16),
+            tickfont=dict(color='#FFFFFF', size=12),
+            gridcolor='rgba(255, 255, 255, 0.1)',
+            linecolor='rgba(255, 255, 255, 0.2)'
         )
     )
     if height:
@@ -83,36 +83,36 @@ def get_plot_config():
 
 def update_plotly_layout(fig):
     fig.update_layout(
-        paper_bgcolor='white',
-        plot_bgcolor='white',
+        paper_bgcolor='#2D2D2D',
+        plot_bgcolor='#2D2D2D',
         font=dict(
-            color='#000000',
+            color='#FFFFFF',
             size=14
         ),
         xaxis=dict(
             showgrid=True,
             gridwidth=1,
-            gridcolor='rgba(128, 128, 128, 0.2)',
+            gridcolor='rgba(255, 255, 255, 0.1)',
             showline=True,
             linewidth=1,
-            linecolor='rgba(0, 0, 0, 0.3)',
-            title_font=dict(color='#000000', size=16),
-            tickfont=dict(color='#000000', size=12)
+            linecolor='rgba(255, 255, 255, 0.2)',
+            title_font=dict(color='#FFFFFF', size=16),
+            tickfont=dict(color='#FFFFFF', size=12)
         ),
         yaxis=dict(
             showgrid=True,
             gridwidth=1,
-            gridcolor='rgba(128, 128, 128, 0.2)',
+            gridcolor='rgba(255, 255, 255, 0.1)',
             showline=True,
             linewidth=1,
-            linecolor='rgba(0, 0, 0, 0.3)',
-            title_font=dict(color='#000000', size=16),
-            tickfont=dict(color='#000000', size=12)
+            linecolor='rgba(255, 255, 255, 0.2)',
+            title_font=dict(color='#FFFFFF', size=16),
+            tickfont=dict(color='#FFFFFF', size=12)
         ),
         margin=dict(t=80, l=50, r=50, b=50),
         modebar=dict(
-            bgcolor='rgba(255, 255, 255, 0.9)',
-            color='#000000',
+            bgcolor='rgba(45, 45, 45, 0.9)',
+            color='#FFFFFF',
             activecolor='#4CAF50'
         )
     )
@@ -133,16 +133,27 @@ colors = {
 st.set_page_config(
     page_title="Bank Customer Retention Dashboard",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
+    page_icon="🏦"
 )
 
-# Custom CSS
+# Custom CSS for dark theme
 st.markdown("""
 <style>
+    /* Main container and background */
     .main {
         background-color: #1E1E1E;
-        color: #FFFFFF;
     }
+    .stApp {
+        background-color: #1E1E1E;
+    }
+    
+    /* Sidebar styling */
+    .css-1d391kg, [data-testid="stSidebar"] {
+        background-color: #252525;
+    }
+    
+    /* Metric cards */
     .stMetric {
         background-color: #2D2D2D;
         color: #FFFFFF !important;
@@ -155,17 +166,17 @@ st.markdown("""
         transform: translateY(-5px);
         background-color: #3D3D3D;
     }
+    
+    /* Plot containers */
     .stPlotlyChart {
-        background-color: white !important;
+        background-color: #2D2D2D !important;
         padding: 1rem;
         border-radius: 8px !important;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
         margin: 1rem 0 !important;
-        overflow: hidden !important;
     }
-    .css-1d391kg {
-        padding-top: 1rem;
-    }
+    
+    /* Buttons */
     .stButton button {
         background-color: #4CAF50;
         color: white !important;
@@ -177,61 +188,98 @@ st.markdown("""
     .stButton button:hover {
         background-color: #45a049;
     }
-    h1, h2, h3, h4, h5, h6, .metric-label {
+    
+    /* Text elements */
+    h1, h2, h3, h4, h5, h6 {
         color: #FFFFFF !important;
-    }
-    .metric-value {
-        color: #FFFFFF !important;
-        font-weight: bold;
     }
     .stMarkdown {
         color: #FFFFFF !important;
     }
+    p {
+        color: #FFFFFF !important;
+    }
+    
+    /* Metric values and labels */
     div[data-testid="stMetricValue"] {
         color: #FFFFFF !important;
     }
     div[data-testid="stMetricLabel"] {
         color: #FFFFFF !important;
     }
+    
+    /* Input widgets */
+    .stSelectbox select {
+        background-color: #2D2D2D;
+        color: #FFFFFF;
+        border: 1px solid #404040;
+    }
+    .stSlider {
+        color: #FFFFFF;
+    }
+    .stMultiSelect {
+        background-color: #2D2D2D;
+        color: #FFFFFF;
+    }
+    
+    /* Radio buttons */
+    .stRadio > label {
+        color: #FFFFFF !important;
+    }
+    
+    /* Plotly modebar */
     .modebar {
-        background-color: rgba(255, 255, 255, 0.9) !important;
+        background-color: rgba(45, 45, 45, 0.9) !important;
         border-radius: 4px !important;
         margin-top: 10px !important;
-        border: 1px solid #E0E0E0 !important;
-        right: 10px !important;
+        border: 1px solid #404040 !important;
     }
     .modebar-btn {
-        color: #1E1E1E !important;
-        background-color: transparent !important;
-        transition: all 0.3s ease !important;
+        color: #FFFFFF !important;
     }
     .modebar-btn:hover {
         color: #4CAF50 !important;
-        transform: scale(1.1) !important;
     }
     .modebar-btn.active {
         color: #4CAF50 !important;
     }
-    .js-plotly-plot .plotly .modebar {
-        top: 10px !important;
-    }
+    
+    /* Plot elements */
     .gtitle, .xtitle, .ytitle {
-        fill: #000000 !important;
-        font-size: 16px !important;
-        font-weight: 500 !important;
+        fill: #FFFFFF !important;
     }
     .xtick text, .ytick text {
-        fill: #000000 !important;
-        font-size: 12px !important;
+        fill: #FFFFFF !important;
     }
-    .js-plotly-plot .plotly .main-svg {
-        border-radius: 8px !important;
+    
+    /* Sidebar navigation */
+    .css-1d391kg {
+        padding-top: 1rem;
     }
-    .js-plotly-plot {
-        border-radius: 8px !important;
+    
+    /* Slider input */
+    .stSlider input {
+        background-color: #2D2D2D !important;
+        color: #FFFFFF !important;
     }
-    .plot-container {
-        border-radius: 8px !important;
+    
+    /* Number input */
+    .stNumberInput input {
+        background-color: #2D2D2D !important;
+        color: #FFFFFF !important;
+        border: 1px solid #404040 !important;
+    }
+    
+    /* Select boxes */
+    .stSelectbox > div > div {
+        background-color: #2D2D2D !important;
+        color: #FFFFFF !important;
+    }
+    
+    /* MultiSelect */
+    .stMultiSelect > div > div {
+        background-color: #2D2D2D !important;
+        color: #FFFFFF !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -240,6 +288,8 @@ st.markdown("""
 @st.cache_data
 def load_data():
     df = pd.read_csv('Customer-Churn-Records.csv')
+    # Map Exited values to readable labels
+    df['Churn_Status'] = df['Exited'].map({0: 'Non-Churned', 1: 'Churned'})
     return df
 
 df = load_data()
@@ -321,7 +371,7 @@ if page == "📊 Overview":
             x=0.5,
             xanchor='center',
             yanchor='top',
-            font=dict(color='#000000', size=20)
+            font=dict(color='#FFFFFF', size=20)
         ),
         geo=dict(
             scope='europe',
@@ -337,7 +387,7 @@ if page == "📊 Overview":
         ),
         paper_bgcolor='white',
         plot_bgcolor='white',
-        font=dict(color='#000000', size=14),
+        font=dict(color='#FFFFFF', size=14),
         height=500,
         margin=dict(t=80, l=50, r=50, b=50)
     )
@@ -353,12 +403,12 @@ if page == "📊 Overview":
         # Age Distribution with Density Plot
         fig_age = go.Figure()
         
-        for exited, color in zip([0, 1], [colors['primary'], colors['danger']]):
-            age_data = df[df['Exited'] == exited]['Age']
+        for status, color in zip(['Non-Churned', 'Churned'], [colors['primary'], colors['danger']]):
+            age_data = df[df['Churn_Status'] == status]['Age']
             fig_age.add_trace(go.Violin(
-                x=['Retained' if exited == 0 else 'Churned'] * len(age_data),
+                x=[status] * len(age_data),
                 y=age_data,
-                name='Retained' if exited == 0 else 'Churned',
+                name=status,
                 box_visible=True,
                 meanline_visible=True,
                 line_color=color,
@@ -370,10 +420,10 @@ if page == "📊 Overview":
         fig_age.update_traces(
             box=dict(
                 fillcolor='white',
-                line=dict(color='#000000', width=1)
+                line=dict(color='#FFFFFF', width=1)
             ),
-            meanline=dict(color='#000000', width=1),
-            line=dict(color='#000000', width=1)
+            meanline=dict(color='#FFFFFF', width=1),
+            line=dict(color='#FFFFFF', width=1)
         )
         
         fig_age = update_plotly_layout(fig_age)
@@ -381,14 +431,14 @@ if page == "📊 Overview":
     
     with col2:
         # Product Usage Sunburst
-        product_churn = df.groupby(['NumOfProducts', 'Exited']).size().reset_index(name='count')
+        product_churn = df.groupby(['NumOfProducts', 'Churn_Status']).size().reset_index(name='count')
         fig_products = px.sunburst(
             product_churn,
-            path=['NumOfProducts', 'Exited'],
+            path=['NumOfProducts', 'Churn_Status'],
             values='count',
             title="Product Usage and Churn Distribution",
-            color='Exited',
-            color_discrete_map={0: colors['primary'], 1: colors['danger']}
+            color='Churn_Status',
+            color_discrete_map={'Non-Churned': colors['primary'], 'Churned': colors['danger']}
         )
         
         fig_products.update_layout(
@@ -398,9 +448,9 @@ if page == "📊 Overview":
                 x=0.5,
                 xanchor='center',
                 yanchor='top',
-                font=dict(color='#000000', size=20)
+                font=dict(color='#FFFFFF', size=20)
             ),
-            font=dict(color='#000000', size=14)
+            font=dict(color='#FFFFFF', size=14)
         )
         
         fig_products = update_plotly_layout(fig_products)
@@ -424,11 +474,11 @@ elif page == "👥 Customer Demographics":
         fig_age = px.histogram(
             filtered_df,
             x="Age",
-            color="Exited",
+            color="Churn_Status",
             marginal="box",
             nbins=30,
             title=f"Age Distribution ({age_bins[0]}-{age_bins[1]} years)",
-            color_discrete_map={0: colors['primary'], 1: colors['danger']}
+            color_discrete_map={'Non-Churned': colors['primary'], 'Churned': colors['danger']}
         )
         
         fig_age.update_layout(
@@ -442,20 +492,20 @@ elif page == "👥 Customer Demographics":
     
     with col2:
         # Gender Distribution with Donut Chart
-        gender_data = df.groupby(['Gender', 'Exited']).size().unstack()
+        gender_data = df.groupby(['Gender', 'Churn_Status']).size().unstack()
         
         fig_gender = go.Figure(data=[
             go.Pie(
                 labels=gender_data.index,
-                values=gender_data[0],
-                name="Retained",
+                values=gender_data['Non-Churned'],
+                name="Non-Churned",
                 hole=0.6,
                 domain={'x': [0, 0.45]},
                 marker_colors=[colors['primary'], colors['secondary']]
             ),
             go.Pie(
                 labels=gender_data.index,
-                values=gender_data[1],
+                values=gender_data['Churned'],
                 name="Churned",
                 hole=0.6,
                 domain={'x': [0.55, 1]},
@@ -464,9 +514,9 @@ elif page == "👥 Customer Demographics":
         ])
         
         fig_gender.update_layout(
-            title="Gender Distribution: Retained vs Churned",
+            title="Gender Distribution: Non-Churned vs Churned",
             annotations=[
-                dict(text="Retained", x=0.20, y=0.5, font_size=12, showarrow=False, font_color=colors['text']),
+                dict(text="Non-Churned", x=0.20, y=0.5, font_size=12, showarrow=False, font_color=colors['text']),
                 dict(text="Churned", x=0.80, y=0.5, font_size=12, showarrow=False, font_color=colors['text'])
             ],
             paper_bgcolor=colors['background'],
@@ -497,13 +547,13 @@ elif page == "💰 Financial Analysis":
     # Create violin plot with individual points
     fig_balance = go.Figure()
     
-    for exited, color in zip([0, 1], [colors['primary'], colors['danger']]):
-        balance_data = filtered_df[filtered_df['Exited'] == exited]['Balance']
+    for status, color in zip(['Non-Churned', 'Churned'], [colors['primary'], colors['danger']]):
+        balance_data = filtered_df[filtered_df['Churn_Status'] == status]['Balance']
         
         fig_balance.add_trace(go.Violin(
-            x=['Retained' if exited == 0 else 'Churned'] * len(balance_data),
+            x=[status] * len(balance_data),
             y=balance_data,
-            name='Retained' if exited == 0 else 'Churned',
+            name=status,
             box_visible=True,
             meanline_visible=True,
             points="all",
@@ -534,11 +584,11 @@ elif page == "💰 Financial Analysis":
         fig_credit = px.histogram(
             df,
             x="CreditScore",
-            color="Exited",
+            color="Churn_Status",
             marginal="box",
             nbins=50,
             title="Credit Score Distribution",
-            color_discrete_map={0: colors['primary'], 1: colors['danger']}
+            color_discrete_map={'Non-Churned': colors['primary'], 'Churned': colors['danger']}
         )
         
         fig_credit.update_layout(
@@ -561,11 +611,11 @@ elif page == "💰 Financial Analysis":
             df,
             x="CreditScore",
             y="Balance",
-            color="Exited",
+            color="Churn_Status",
             size="Age",
             hover_data=["Geography", "Gender"],
             title="Credit Score vs Balance",
-            color_discrete_map={0: colors['primary'], 1: colors['danger']}
+            color_discrete_map={'Non-Churned': colors['primary'], 'Churned': colors['danger']}
         )
         
         fig_scatter.update_layout(
@@ -600,15 +650,15 @@ elif page == "⭐ Satisfaction Analysis":
     filtered_df = df[df['Satisfaction Score'].isin(satisfaction_selection)]
     
     # Create an interactive sunburst chart
-    satisfaction_data = filtered_df.groupby(['Satisfaction Score', 'Complain', 'Exited']).size().reset_index(name='count')
+    satisfaction_data = filtered_df.groupby(['Satisfaction Score', 'Complain', 'Churn_Status']).size().reset_index(name='count')
     
     fig_satisfaction = px.sunburst(
         satisfaction_data,
-        path=['Satisfaction Score', 'Complain', 'Exited'],
+        path=['Satisfaction Score', 'Complain', 'Churn_Status'],
         values='count',
         title="Satisfaction Score, Complaints, and Churn Relationship",
-        color='Exited',
-        color_discrete_map={0: colors['primary'], 1: colors['danger']}
+        color='Churn_Status',
+        color_discrete_map={'Non-Churned': colors['primary'], 'Churned': colors['danger']}
     )
     
     fig_satisfaction.update_layout(
@@ -653,7 +703,7 @@ elif page == "⭐ Satisfaction Analysis":
     
     with col2:
         # Satisfaction Score Trends
-        satisfaction_trend = df.groupby('Satisfaction Score')['Exited'].mean() * 100
+        satisfaction_trend = df.groupby('Satisfaction Score')['Churn_Status'].mean() * 100
         
         fig_satisfaction_trend = go.Figure(data=[
             go.Scatter(
@@ -838,42 +888,42 @@ elif page == "📈 Interactive Analysis":
             df,
             x=x_axis,
             y=y_axis,
-            color='Exited',
+            color='Churn_Status',
             size='Balance',
             hover_data=['Geography', 'Gender'],
             title=f"{x_axis} vs {y_axis}",
-            color_discrete_map={0: colors['primary'], 1: colors['danger']}
+            color_discrete_map={'Non-Churned': colors['primary'], 'Churned': colors['danger']}
         )
     
     elif plot_type == 'Box':
         fig = px.box(
             df,
-            x='Exited',
+            x='Churn_Status',
             y=x_axis if x_axis != y_axis else y_axis,
-            color='Exited',
+            color='Churn_Status',
             title=f"{x_axis if x_axis != y_axis else y_axis} Distribution by Churn Status",
-            color_discrete_map={0: colors['primary'], 1: colors['danger']}
+            color_discrete_map={'Non-Churned': colors['primary'], 'Churned': colors['danger']}
         )
     
     elif plot_type == 'Violin':
         fig = px.violin(
             df,
-            x='Exited',
+            x='Churn_Status',
             y=x_axis if x_axis != y_axis else y_axis,
-            color='Exited',
+            color='Churn_Status',
             box=True,
             title=f"{x_axis if x_axis != y_axis else y_axis} Distribution by Churn Status",
-            color_discrete_map={0: colors['primary'], 1: colors['danger']}
+            color_discrete_map={'Non-Churned': colors['primary'], 'Churned': colors['danger']}
         )
     
     else:  # Histogram
         fig = px.histogram(
             df,
             x=x_axis if x_axis != y_axis else y_axis,
-            color='Exited',
+            color='Churn_Status',
             marginal='box',
             title=f"{x_axis if x_axis != y_axis else y_axis} Distribution",
-            color_discrete_map={0: colors['primary'], 1: colors['danger']}
+            color_discrete_map={'Non-Churned': colors['primary'], 'Churned': colors['danger']}
         )
     
     fig.update_layout(
@@ -908,13 +958,13 @@ elif page == "📈 Interactive Analysis":
             x=0.5,
             xanchor='center',
             yanchor='top',
-            font=dict(color='#000000', size=20)
+            font=dict(color='#FFFFFF', size=20)
         ),
-        font=dict(color='#000000', size=14),
+        font=dict(color='#FFFFFF', size=14),
         coloraxis_colorbar=dict(
             title="Correlation",
-            titlefont=dict(color='#000000', size=14),
-            tickfont=dict(color='#000000', size=12)
+            titlefont=dict(color='#FFFFFF', size=14),
+            tickfont=dict(color='#FFFFFF', size=12)
         )
     )
     
